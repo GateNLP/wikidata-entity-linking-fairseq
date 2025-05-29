@@ -276,6 +276,7 @@ class SequenceGenerator(nn.Module):
             self.min_len <= max_len
         ), "min_len cannot be larger than max_len, please adjust these!"
         # compute the encoder output for each beam
+        torch.set_num_threads(1)
         with torch.autograd.profiler.record_function("EnsembleModel: forward_encoder"):
             encoder_outs = self.model.forward_encoder(net_input)
 
